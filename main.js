@@ -1,15 +1,14 @@
 // 'use strict';
 
-//need class = clock-display to get the current time\
-
 function updateClock(){
     const date = new Date();
     const time = (date.getHours() +":"+ date.getMinutes() +":"+ date.getSeconds());
     console.log(time);
 
     const $clock = document.querySelector('.clock-display');
-    console.log($clock.innerText); //innerText is getter - gets clock
+    console.log($clock.textContent); 
 
+    $clock.textContent = time //I DID IT!(10:05pm)
 
 // attempt at getting the time to show up in the blue box
     // $clock.textContent = '00:00:00' //find out how to change textContent of the element
@@ -33,7 +32,7 @@ function updateClock(){
 };
 setInterval(updateClock,1000);
 
-
+// document.getElementsByClassName('clock-display').innerHTML = $clock;
 //** Another attempt at console.logging the % of a min that current second represents
 // const minute = 60
 
@@ -41,3 +40,4 @@ setInterval(updateClock,1000);
 //     return (100 * seconds/minute);
 //     console.log(percentage);
 //  }
+
