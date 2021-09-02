@@ -26,9 +26,6 @@
 // //         return (100 * (sec/min));
 // //         }
 // // console.log(perBar);
-
-    
-
 // };
 // setInterval(updateClock,1000);
 
@@ -47,33 +44,44 @@
 const $progressbar = document.querySelector('.clock-progress-bar');
 const $clock = document.querySelector('.clock');
 const $display = document.querySelector('.clock-display');
-let index = 0;
+
 
 const color =['#DF5069', '#FF0000', '#00FF00','#95D0F0','#E3B44C'];
-    let isHovering = false; //default for the page
+let index = 0;
+let isHovering = false; //default for the page
 
+    //function setDate fires EVERY SECOND (see bottom when function is called)
 
-function setDate() { //this function fires EVERY SECOND (see bottom when function is called)
+function setDate() { 
     const now = new Date(); //creating a new object - it's a date OBJECT
     let seconds, minutes, hour;
-
-    $display.innerHTML = `${hour}:${minutes}:${seconds}`;
-    $progressbar.style.width = `${seconds/60 * 14}rem`  // =string interpulation (``) 
     
     if(isHovering){
         seconds = ('0' + now.getSeconds()).slice(-2);
         minutes = ('0' + now.getMinutes()).slice(-2); //padding values with O + slice(-2) cutting off :22 of :022
-        hour = ('0' + now.getHour()).slice(-2);
+        hour = ('0' + now.getHours()).slice(-2);
     } else {
-    // console.log(seconds/60);    //gets percentage of the minute
         seconds = ('0' + now.getSeconds().toString()).slice(-2);
         minutes = ('0' + now.getMinutes().toString()).slice(-2); // number.prototype.toString will convert number to hexdecimal
-        hour = ('0' + now.getHour().toString()).slice(-2);
+        hour = ('0' + now.getHours().toString()).slice(-2);
         };
 
+        $display.innerHTML = `${hour}:${minutes}:${seconds}`
+        $progressbar.style.width =  `${seconds/60 * 14}rem`
     // const color =['#DF5069', '#FF0000', '#00FF00','#95D0F0','#E3B44C'];
     // let index = 0;
     // let isHovering = false; //default for the page
+
+    // $clock.addEventListener('mouseover', function(){
+    //     isHovering = true;
+    // });
+    // $clock.addEventListener('mouseout', function(){
+    //     isHovering = false;
+    // });
+};
+
+function setBackground() {
+    // const color =['#DF5069', '#FF0000', '#00FF00','#95D0F0','#E3B44C'];
 
     $clock.addEventListener('mouseover', function(){
         isHovering = true;
@@ -82,17 +90,10 @@ function setDate() { //this function fires EVERY SECOND (see bottom when functio
         isHovering = false;
     });
 
+    return color
 
-};
-    function setBackground() {
-        const color =['#DF5069', '#FF0000', '#00FF00','#95D0F0','#E3B44C'];
-        $clock.style.background = `${colors[index]}`;
-        index === colors.length - 1 ? index = 0 : index++; //ternary equal to commented out if...else below
-        // if (index === colors.length - 1) {
-        //     index = 0;
-        // } else {
-        //     index = index + 1;
-        // }
+    
+
     };
 
 setInterval(setDate,1000);
